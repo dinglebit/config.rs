@@ -135,7 +135,7 @@ pub trait Config {
 macro_rules! default_config(
     { $($key:expr => $value:expr),+ } => {
         {
-            let mut m: HashMap<&str, &str> = ::std::collections::HashMap::new();
+            let mut m: ::std::collections::HashMap<&str, &str> = ::std::collections::HashMap::new();
             $(
                 m.insert($key, $value);
             )+
