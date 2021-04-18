@@ -139,7 +139,7 @@ macro_rules! default_config(
             $(
                 m.insert($key, $value);
             )+
-            m
+            Box::new(m)
         }
      };
 );
