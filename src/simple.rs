@@ -64,7 +64,7 @@ impl Simple {
     /// no hierarchy or anything. If you want to provide some
     /// yourself, you can use dot-notation. For example:
     ///
-    /// ```
+    /// ```ini
     /// ## i am a comment
     /// mongo.uri = mongodb://localhost/
     /// mongo.db  = test

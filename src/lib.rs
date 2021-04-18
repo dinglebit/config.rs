@@ -130,6 +130,20 @@ pub trait Config {
     }
 }
 
+/// Create a config from a list of key/value pairs.
+#[macro_export]
+macro_rules! default_config(
+    { $($key:expr => $value:expr),+ } => {
+        {
+            let mut m: HashMap<&str, &str> = ::std::collections::HashMap::new();
+            $(
+                m.insert($key, $value);
+            )+
+            m
+        }
+     };
+);
+
 impl Config for HashMap<&str, &str> {
     fn get(&self, key: &str) -> Option<String> {
         match self.get(key) {
@@ -145,6 +159,16 @@ mod tests {
     use chrono::{TimeZone, Utc};
     use lazy_static::lazy_static;
     use std::collections::HashMap;
+
+    #[test]
+    fn default() {
+        let config = default_config! {
+            "foo" => "bar",
+            "bar" => "baz",
+            "baz" => "foo"
+        };
+        assert_eq!(config.string("foo"), "bar".to_string());
+    }
 
     #[test]
     fn hash_map() {
